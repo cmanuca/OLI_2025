@@ -166,12 +166,12 @@
                 <div class="elev-container">
                     <h4>Elev </h4>
                     <div class="input-group">
-                        <label for="elev-nume-1">Nume elev:</label>
+                        <label for="elev-nume">Nume elev:</label>
                         <input type="text" name="elev_nume[]" required>
                     </div>
 
                     <div class="input-group">
-                        <label for="elev-scoala-1">Școala:</label>
+                        <label for="elev-scoala">Școala:</label>
                         <select name="elev_scoala[]" required>
                             <option value="Liceul Teoretic Mihai Eminescu">Liceul Teoretic Mihai Eminescu</option>
                             <option value="Școala Gimnazială George Coșbuc">Școala Gimnazială George Coșbuc</option>
@@ -180,23 +180,18 @@
                     </div>
 
                     <div class="input-group">
-                        <label for="elev-email-1">Email elev:</label>
+                        <label for="elev-email">Email elev:</label>
                         <input type="email" name="elev_email[]" required>
                     </div>
 
                     <div class="input-group">
-                        <label for="elev-telefon-1">Telefon elev:</label>
+                        <label for="elev-telefon">Telefon elev:</label>
                         <input type="text" name="elev_telefon[]" required>
                     </div>
 
                     <div class="input-group">
                         <label for="elev-alti-profesori-1">Alți profesori:</label>
                         <input type="text" name="elev_alti_profesori[]">
-                    </div>
-
-                    <div class="input-group">
-                        <label for="elev-centre-excelenta-1">Centre de excelență:</label>
-                        <input type="text" name="elev_centre_excelenta[]">
                     </div>
 
                     <div class="input-group">
@@ -223,40 +218,5 @@
 
         function adaugaElev() {
             elevCounter++;
-            const eleviLista = document.getElementById('elevi-lista');
-
-            const container = document.createElement('div');
-            container.className = 'elev-container';
-            container.innerHTML = `
-                <h4>Elev ${elevCounter}</h4>
-                <div class="input-group">
-                    <label for="elev-nume-${elevCounter}">Nume elev:</label>
-                    <input type="text" name="elev_nume[]" required>
-                </div>
-
-                <div class="input-group">
-                    <label for="elev-scoala-${elevCounter}">Școala:</label>
-                    <select name="elev_scoala[]" required>
-                        <option value="Liceul Teoretic Mihai Eminescu">Liceul Teoretic Mihai Eminescu</option>
-                        <option value="Școala Gimnazială George Coșbuc">Școala Gimnazială George Coșbuc</option>
-                        <option value="Liceul de Informatică">Liceul de Informatică</option>
-                    </select>
-                </div>
-
-                <div class="input-group">
-                    <label for="elev-email-${elevCounter}">Email elev:</label>
-                    <input type="email" name="elev_email[]" required>
-                </div>
-
-                <div class="input-group">
-                    <label for="elev-telefon-${elevCounter}">Telefon elev:</label>
-                    <input type="text" name="elev_telefon[]" required>
-                </div>
-
-                <div class="input-group">
-                    <label for="elev-alti-profesori-${elevCounter}">Alți profesori:</label>
-                    <input type="text" name="elev_alti_profesori[]">
-                </div>
-
-                <div class="input-group">
-                    <label for="elev-centre-excelenta-${e
+        }
+    </script>
