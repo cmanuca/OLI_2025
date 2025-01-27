@@ -299,24 +299,29 @@
         function exportaExcel() {
             const profesorNume = document.getElementById('profesor-nume').value;
             const profesorEmail = document.getElementById('profesor-email').value;
-            const profesorTelefon = document.getElementById('profesor-telefon').value;            
-
+            const profesorTelefon = document.getElementById('profesor-telefon').value;
+        
             const eleviNume = document.querySelectorAll('input[name="elev_nume[]"]');
             const eleviScoala = document.querySelectorAll('select[name="elev_scoala[]"]');
-            const eleviLocalitate = document.querySelectorAll('select[name="elev_localitate[]"]');
+            const eleviLocalitate = document.querySelectorAll('input[name="elev_localitate[]"]');
             const eleviEmail = document.querySelectorAll('input[name="elev_email[]"]');
             const eleviTelefon = document.querySelectorAll('input[name="elev_telefon[]"]');
             const eleviAltiProfesori = document.querySelectorAll('input[name="elev_alti_profesori[]"]');
-            const eleviCentreExcelenta = document.querySelectorAll('input[name="elev_centre_excelenta[]"]');
-
+            const eleviCentreExcelenta = document.querySelectorAll('select#centre-excelenta');
+        
             const date = [
                 ["Nume Profesor", "Email Profesor", "Telefon Profesor"],
                 [profesorNume, profesorEmail, profesorTelefon],
                 [],
-                ["Nume Elev", "Școala", "Email Elev", "Telefon Elev", "Alți Profesori"]
+                ["Nume Elev", "Școala", "Localitate", "Email Elev", "Telefon Elev", "Alți Profesori", "Centre excelență"]
             ];
-
+        
             for (let i = 0; i < eleviNume.length; i++) {
+                // Obținem opțiunile selectate pentru centre de excelență
+                const optiuniSelectate = Array.from(eleviCentreExcelenta[i].selectedOptions)
+                    .map(option => option.value)
+                    .join(', ');
+        
                 date.push([
                     eleviNume[i].value,
                     eleviScoala[i].value,
@@ -324,10 +329,10 @@
                     eleviEmail[i].value,
                     eleviTelefon[i].value,
                     eleviAltiProfesori[i].value,
-                    eleviCentreExcelenta[i].value
+                    optiuniSelectate // Adăugăm aici opțiunile selectate
                 ]);
             }
-
+        
             const wb = XLSX.utils.book_new();
             const ws = XLSX.utils.aoa_to_sheet(date);
             XLSX.utils.book_append_sheet(wb, ws, "Date Olimpiadă");
