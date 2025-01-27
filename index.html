@@ -186,12 +186,15 @@
                             <option value='Școala Gimnazială Nr. 5'>Școala Gimnazială Nr. 5</option>
                             <option value='Școala Gimnazială Nr. 8'>Școala Gimnazială Nr. 8</option>
                             <option value='Școala Gimnazială Nr. 12'>Școala Gimnazială Nr. 12</option>
+                            <option value='Școala Gimnazială Nr. 19'>Școala Gimnazială Nr. 19</option>
                             <option value='Școala Gimnazială Nr. 27'>Școala Gimnazială Nr. 27</option>
-                            
-                            
-                            
-                            
+                            <option value='Școala Gimnazială Nr. 4'>Școala Gimnazială Nr. 4</option>
                         </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="elev-localitate">Localitate școală:</label>
+                        <input type="text" name="elev_localitate[]" required>
                     </div>
 
                     <div class="input-group">
@@ -233,16 +236,33 @@
             container.className = 'elev-container';
             container.innerHTML = `
                 <h4>Elev ${elevCounter}</h4>
+                
                 <label>Nume elev:</label><br>
                 <input type="text" name="elev_nume[]" required><br><br>
 
                 <label>Școala:</label><br>
                 <select name="elev_scoala[]" required>
-                    <option value="Liceul Teoretic Mihai Eminescu">Liceul Teoretic Mihai Eminescu</option>
-                    <option value="Școala Gimnazială George Coșbuc">Școala Gimnazială George Coșbuc</option>
-                    <option value="Liceul de Informatică">Liceul de Informatică</option>
+                 <option value='Colegiul "Nicolae Titulescu"'>Colegiul "Nicolae Titulescu"</option>
+                        <option value='Colegiul Național "Dr. Ioan Mesotă"'>Colegiul Național "Dr. Ioan Mesotă"</option>
+                        <option value='Colegiul Național ”Radu Negru”'>Colegiul Național ”Radu Negru”</option>
+                        <option value='Colegiul Național "Andrei Șaguna"'>Colegiul Național "Andrei Șaguna"</option>
+                        <option value='Colegiul Național de Informatică "Gr. Moisil"'>Colegiul Național de Informatică "Gr. Moisil"</option>
+                        <option value='Colegiul Național "Unirea"'>Colegiul Național "Unirea"</option>
+                        <option value='Liceul "Andrei Mureșanu"'>Liceul "Andrei Mureșanu"</option>
+                        <option value='Liceul Silvic "Dr. Nicolae Rucăreanu"'>Liceul Silvic "Dr. Nicolae Rucăreanu"</option>
+                        <option value='Școala Gimnazială Nr. 1'>Școala Gimnazială Nr. 1</option>
+                        <option value='Școala Gimnazială Nr. 2'>Școala Gimnazială Nr. 2</option>
+                        <option value='Școala Gimnazială Nr. 5'>Școala Gimnazială Nr. 5</option>
+                        <option value='Școala Gimnazială Nr. 8'>Școala Gimnazială Nr. 8</option>
+                        <option value='Școala Gimnazială Nr. 12'>Școala Gimnazială Nr. 12</option>
+                        <option value='Școala Gimnazială Nr. 19'>Școala Gimnazială Nr. 19</option>
+                        <option value='Școala Gimnazială Nr. 27'>Școala Gimnazială Nr. 27</option>
+                        <option value='Școala Gimnazială Nr. 4'>Școala Gimnazială Nr. 4</option>
                 </select><br><br>
-
+                
+                <label>Localitate școală:</label><br>
+                <input type="text" name="elev_localitate[]" required><br><br>
+                
                 <label>Email elev:</label><br>
                 <input type="email" name="elev_email[]" required><br><br>
 
@@ -261,27 +281,28 @@
         function exportaExcel() {
             const profesorNume = document.getElementById('profesor-nume').value;
             const profesorEmail = document.getElementById('profesor-email').value;
-            const profesorTelefon = document.getElementById('profesor-telefon').value;
-            const centreExcelenta = Array.from(document.getElementById('centre-excelenta').selectedOptions).map(opt => opt.value).join(", ");
+            const profesorTelefon = document.getElementById('profesor-telefon').value;            
 
             const eleviNume = document.querySelectorAll('input[name="elev_nume[]"]');
             const eleviScoala = document.querySelectorAll('select[name="elev_scoala[]"]');
+            const eleviLocalitate = document.querySelectorAll('select[name="elev_localitate[]"]');
             const eleviEmail = document.querySelectorAll('input[name="elev_email[]"]');
             const eleviTelefon = document.querySelectorAll('input[name="elev_telefon[]"]');
             const eleviAltiProfesori = document.querySelectorAll('input[name="elev_alti_profesori[]"]');
             const eleviCentreExcelenta = document.querySelectorAll('input[name="elev_centre_excelenta[]"]');
 
             const date = [
-                ["Nume Profesor", "Email Profesor", "Telefon Profesor", "Centre Excelenta"],
-                [profesorNume, profesorEmail, profesorTelefon, centreExcelenta],
+                ["Nume Profesor", "Email Profesor", "Telefon Profesor"],
+                [profesorNume, profesorEmail, profesorTelefon],
                 [],
-                ["Nume Elev", "Școala", "Email Elev", "Telefon Elev", "Alți Profesori", "Centre Excelență"]
+                ["Nume Elev", "Școala", "Email Elev", "Telefon Elev", "Alți Profesori"]
             ];
 
             for (let i = 0; i < eleviNume.length; i++) {
                 date.push([
                     eleviNume[i].value,
                     eleviScoala[i].value,
+                    eleviLocalitate[i].value,
                     eleviEmail[i].value,
                     eleviTelefon[i].value,
                     eleviAltiProfesori[i].value,
