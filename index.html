@@ -8,8 +8,7 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7fa;
-            color: #333;
+            background-color: #e7eaf0;
             margin: 0;
             padding: 0;
             display: flex;
@@ -20,31 +19,40 @@
 
         .container {
             width: 80%;
-            max-width: 900px;
+            max-width: 1000px;
             background-color: #ffffff;
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .container:hover {
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
         }
 
         h1 {
             text-align: center;
-            color: #2e4a7a;
+            color: #34495e;
+            font-size: 2.5rem;
             margin-bottom: 20px;
+            letter-spacing: 1px;
         }
 
         h2 {
-            color: #2e4a7a;
-            border-bottom: 2px solid #2e4a7a;
-            padding-bottom: 5px;
+            color: #2c3e50;
+            font-size: 1.8rem;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
         }
 
         .section {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: #f5f6fa;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .input-group {
@@ -54,39 +62,56 @@
         .input-group label {
             display: block;
             font-weight: bold;
-            margin-bottom: 5px;
+            color: #2c3e50;
+            margin-bottom: 8px;
         }
 
         .input-group input, .input-group select {
             width: 100%;
-            padding: 10px;
-            font-size: 14px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #bdc3c7;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            border-color: #3498db;
+            outline: none;
         }
 
         .button {
-            background-color: #007bff;
+            background-color: #3498db;
             color: white;
-            padding: 12px 18px;
+            padding: 14px 20px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 16px;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         .button:hover {
-            background-color: #0056b3;
+            background-color: #2980b9;
+            transform: translateY(-2px);
         }
 
         .elev-container {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #ecf0f1;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         }
 
         .elev-container h4 {
             margin-top: 0;
-            color: #2e4a7a;
+            color: #2980b9;
+            font-size: 1.4rem;
+        }
+
+        .elev-container .input-group {
+            margin-bottom: 15px;
         }
 
         .elevi-lista {
@@ -97,9 +122,28 @@
             margin-bottom: 10px;
         }
 
+        .elev-container input[type="text"], .elev-container input[type="email"] {
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .elev-container select {
+            font-size: 16px;
+            padding: 10px;
+            border-radius: 8px;
+        }
     </style>
 </head>
 <body>
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #6a11cb, #2575fc); /* Gradient de la violet la albastru */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     <div class="container">
         <h1>Formular de Înscriere la Olimpiadă</h1>
         
@@ -220,49 +264,4 @@
                 </div>
 
                 <div class="input-group">
-                    <label for="elev-centre-excelenta-${elevCounter}">Centre de excelență:</label>
-                    <input type="text" name="elev_centre_excelenta[]">
-                </div>
-            `;
-            eleviLista.appendChild(container);
-        }
-
-        function exportaExcel() {
-            const profesorNume = document.getElementById('profesor-nume').value;
-            const profesorEmail = document.getElementById('profesor-email').value;
-            const profesorTelefon = document.getElementById('profesor-telefon').value;
-            const centreExcelenta = Array.from(document.getElementById('centre-excelenta').selectedOptions).map(opt => opt.value).join(", ");
-
-            const eleviNume = document.querySelectorAll('input[name="elev_nume[]"]');
-            const eleviScoala = document.querySelectorAll('select[name="elev_scoala[]"]');
-            const eleviEmail = document.querySelectorAll('input[name="elev_email[]"]');
-            const eleviTelefon = document.querySelectorAll('input[name="elev_telefon[]"]');
-            const eleviAltiProfesori = document.querySelectorAll('input[name="elev_alti_profesori[]"]');
-            const eleviCentreExcelenta = document.querySelectorAll('input[name="elev_centre_excelenta[]"]');
-
-            const date = [
-                ["Nume Profesor", "Email Profesor", "Telefon Profesor", "Centre Excelenta"],
-                [profesorNume, profesorEmail, profesorTelefon, centreExcelenta],
-                [],
-                ["Nume Elev", "Școala", "Email Elev", "Telefon Elev", "Alți Profesori", "Centre Excelență"]
-            ];
-
-            for (let i = 0; i < eleviNume.length; i++) {
-                date.push([
-                    eleviNume[i].value,
-                    eleviScoala[i].value,
-                    eleviEmail[i].value,
-                    eleviTelefon[i].value,
-                    eleviAltiProfesori[i].value,
-                    eleviCentreExcelenta[i].value
-                ]);
-            }
-
-            const wb = XLSX.utils.book_new();
-            const ws = XLSX.utils.aoa_to_sheet(date);
-            XLSX.utils.book_append_sheet(wb, ws, "Date Olimpiadă");
-            XLSX.writeFile(wb, "Date_Olimpiada.xlsx");
-        }
-    </script>
-</body>
-</html>
+                    <label for="elev-centre-excelenta-${e
