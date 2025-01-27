@@ -7,55 +7,177 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            line-height: 1.6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
-        .elev-container {
+
+        .container {
+            width: 80%;
+            max-width: 900px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2e4a7a;
             margin-bottom: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
+        }
+
+        h2 {
+            color: #2e4a7a;
+            border-bottom: 2px solid #2e4a7a;
+            padding-bottom: 5px;
+        }
+
+        .section {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
             border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        .elev-container h4 {
-            margin-top: 0;
+
+        .input-group {
+            margin-bottom: 15px;
         }
+
+        .input-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
         .button {
             background-color: #007bff;
             color: white;
-            padding: 10px 15px;
+            padding: 12px 18px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
         }
+
         .button:hover {
             background-color: #0056b3;
         }
+
+        .elev-container {
+            margin-bottom: 20px;
+        }
+
+        .elev-container h4 {
+            margin-top: 0;
+            color: #2e4a7a;
+        }
+
+        .elevi-lista {
+            margin-bottom: 20px;
+        }
+
+        .elev-container .input-group {
+            margin-bottom: 10px;
+        }
+
     </style>
 </head>
 <body>
-    <h1>Formular de Înscriere la Olimpiada Locală</h1>
-    <form id="formular-olimpiada">
-        <div id="elevi-lista">
-            <div class="elev-container">
-                <h4>Elev 1</h4>
-                <label>Nume și prenume:</label><br>
-                <input type="text" name="elev_nume[]" required><br><br>
+    <div class="container">
+        <h1>Formular de Înscriere la Olimpiadă</h1>
+        
+        <div class="section" id="profesori-section">
+            <h2>Detalii Profesori</h2>
+            <div class="input-group">
+                <label for="profesor-nume">Nume profesori coordonatori:</label>
+                <input type="text" id="profesor-nume" required>
+            </div>
 
-                <label>Clasa:</label><br>
-                <input type="text" name="elev_clasa[]" required><br><br>
+            <div class="input-group">
+                <label for="centre-excelenta">Centre de excelență (alegere multiplă):</label>
+                <select id="centre-excelenta" multiple>
+                    <option value="Matematică">Matematică</option>
+                    <option value="Informatică">Informatică</option>
+                    <option value="Fizică">Fizică</option>
+                    <option value="Chimie">Chimie</option>
+                </select>
+            </div>
 
-                <label>Școala:</label><br>
-                <input type="text" name="elev_scoala[]" required><br><br>
+            <div class="input-group">
+                <label for="profesor-email">Email profesor:</label>
+                <input type="email" id="profesor-email" required>
+            </div>
 
-                <label>Materia:</label><br>
-                <input type="text" name="elev_materie[]" required><br><br>
+            <div class="input-group">
+                <label for="profesor-telefon">Telefon profesor:</label>
+                <input type="text" id="profesor-telefon" required>
             </div>
         </div>
 
-        <button type="button" class="button" onclick="adaugaElev()">Adaugă Elev</button><br><br>
-        <button type="button" class="button" onclick="exportaExcel()">Exportă Excel</button>
-    </form>
+        <div class="section" id="elevi-section">
+            <h2>Detalii Elevi</h2>
+            <div id="elevi-lista">
+                <div class="elev-container">
+                    <h4>Elev 1</h4>
+                    <div class="input-group">
+                        <label for="elev-nume-1">Nume elev:</label>
+                        <input type="text" name="elev_nume[]" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="elev-scoala-1">Școala:</label>
+                        <select name="elev_scoala[]" required>
+                            <option value="Liceul Teoretic Mihai Eminescu">Liceul Teoretic Mihai Eminescu</option>
+                            <option value="Școala Gimnazială George Coșbuc">Școala Gimnazială George Coșbuc</option>
+                            <option value="Liceul de Informatică">Liceul de Informatică</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="elev-email-1">Email elev:</label>
+                        <input type="email" name="elev_email[]" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="elev-telefon-1">Telefon elev:</label>
+                        <input type="text" name="elev_telefon[]" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="elev-alti-profesori-1">Alți profesori:</label>
+                        <input type="text" name="elev_alti_profesori[]">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="elev-centre-excelenta-1">Centre de excelență:</label>
+                        <input type="text" name="elev_centre_excelenta[]">
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="button" onclick="adaugaElev()">Adaugă Elev</button>
+        </div>
+
+        <div class="section">
+            <button class="button" onclick="exportaExcel()">Exportă Excel</button>
+        </div>
+    </div>
 
     <script>
         let elevCounter = 1;
@@ -68,46 +190,78 @@
             container.className = 'elev-container';
             container.innerHTML = `
                 <h4>Elev ${elevCounter}</h4>
-                <label>Nume și prenume:</label><br>
-                <input type="text" name="elev_nume[]" required><br><br>
+                <div class="input-group">
+                    <label for="elev-nume-${elevCounter}">Nume elev:</label>
+                    <input type="text" name="elev_nume[]" required>
+                </div>
 
-                <label>Clasa:</label><br>
-                <input type="text" name="elev_clasa[]" required><br><br>
+                <div class="input-group">
+                    <label for="elev-scoala-${elevCounter}">Școala:</label>
+                    <select name="elev_scoala[]" required>
+                        <option value="Liceul Teoretic Mihai Eminescu">Liceul Teoretic Mihai Eminescu</option>
+                        <option value="Școala Gimnazială George Coșbuc">Școala Gimnazială George Coșbuc</option>
+                        <option value="Liceul de Informatică">Liceul de Informatică</option>
+                    </select>
+                </div>
 
-                <label>Școala:</label><br>
-                <input type="text" name="elev_scoala[]" required><br><br>
+                <div class="input-group">
+                    <label for="elev-email-${elevCounter}">Email elev:</label>
+                    <input type="email" name="elev_email[]" required>
+                </div>
 
-                <label>Materia:</label><br>
-                <input type="text" name="elev_materie[]" required><br><br>
+                <div class="input-group">
+                    <label for="elev-telefon-${elevCounter}">Telefon elev:</label>
+                    <input type="text" name="elev_telefon[]" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="elev-alti-profesori-${elevCounter}">Alți profesori:</label>
+                    <input type="text" name="elev_alti_profesori[]">
+                </div>
+
+                <div class="input-group">
+                    <label for="elev-centre-excelenta-${elevCounter}">Centre de excelență:</label>
+                    <input type="text" name="elev_centre_excelenta[]">
+                </div>
             `;
             eleviLista.appendChild(container);
         }
 
         function exportaExcel() {
-            // Preia datele din formular
-            const nume = document.querySelectorAll('input[name="elev_nume[]"]');
-            const clasa = document.querySelectorAll('input[name="elev_clasa[]"]');
-            const scoala = document.querySelectorAll('input[name="elev_scoala[]"]');
-            const materie = document.querySelectorAll('input[name="elev_materie[]"]');
+            const profesorNume = document.getElementById('profesor-nume').value;
+            const profesorEmail = document.getElementById('profesor-email').value;
+            const profesorTelefon = document.getElementById('profesor-telefon').value;
+            const centreExcelenta = Array.from(document.getElementById('centre-excelenta').selectedOptions).map(opt => opt.value).join(", ");
 
-            // Creează datele pentru Excel
-            const date = [["Nume și Prenume", "Clasă", "Școală", "Materie"]];
-            for (let i = 0; i < nume.length; i++) {
+            const eleviNume = document.querySelectorAll('input[name="elev_nume[]"]');
+            const eleviScoala = document.querySelectorAll('select[name="elev_scoala[]"]');
+            const eleviEmail = document.querySelectorAll('input[name="elev_email[]"]');
+            const eleviTelefon = document.querySelectorAll('input[name="elev_telefon[]"]');
+            const eleviAltiProfesori = document.querySelectorAll('input[name="elev_alti_profesori[]"]');
+            const eleviCentreExcelenta = document.querySelectorAll('input[name="elev_centre_excelenta[]"]');
+
+            const date = [
+                ["Nume Profesor", "Email Profesor", "Telefon Profesor", "Centre Excelenta"],
+                [profesorNume, profesorEmail, profesorTelefon, centreExcelenta],
+                [],
+                ["Nume Elev", "Școala", "Email Elev", "Telefon Elev", "Alți Profesori", "Centre Excelență"]
+            ];
+
+            for (let i = 0; i < eleviNume.length; i++) {
                 date.push([
-                    nume[i].value,
-                    clasa[i].value,
-                    scoala[i].value,
-                    materie[i].value,
+                    eleviNume[i].value,
+                    eleviScoala[i].value,
+                    eleviEmail[i].value,
+                    eleviTelefon[i].value,
+                    eleviAltiProfesori[i].value,
+                    eleviCentreExcelenta[i].value
                 ]);
             }
 
-            // Creează fișierul Excel
             const wb = XLSX.utils.book_new();
             const ws = XLSX.utils.aoa_to_sheet(date);
-            XLSX.utils.book_append_sheet(wb, ws, "Lista Elevi");
-
-            // Exportă fișierul
-            XLSX.writeFile(wb, "Lista_Elevi.xlsx");
+            XLSX.utils.book_append_sheet(wb, ws, "Date Olimpiadă");
+            XLSX.writeFile(wb, "Date_Olimpiada.xlsx");
         }
     </script>
 </body>
