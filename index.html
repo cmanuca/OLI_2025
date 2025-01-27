@@ -214,7 +214,7 @@
 
                     <div class="input-group">
                         <label for="centre-excelenta">Centre de excelență (alegere multiplă):</label>
-                        <select id="centre-excelenta" multiple>
+                        <select id="centre-excelenta" multiple name = "elev_centre_excelenta[]">
                             <option value="CEX Brașov">CEX Brașov</option>
                             <option value="ViaINFO">ViaINFO</option>                    
                         </select>
@@ -287,7 +287,7 @@
 
                     <div class="input-group">
                         <label for="centre-excelenta">Centre de excelență (alegere multiplă):</label>
-                        <select id="centre-excelenta" multiple>
+                        <select id="centre-excelenta" multiple name = "elev_centre_excelenta[]">
                             <option value="CEX Brașov">CEX Brașov</option>
                             <option value="ViaINFO">ViaINFO</option>                    
                         </select>
@@ -306,9 +306,8 @@
             const eleviLocalitate = document.querySelectorAll('input[name="elev_localitate[]"]');
             const eleviEmail = document.querySelectorAll('input[name="elev_email[]"]');
             const eleviTelefon = document.querySelectorAll('input[name="elev_telefon[]"]');
-            const eleviAltiProfesori = document.querySelectorAll('input[name="elev_alti_profesori[]"]');
-            const eleviCentreExcelenta = document.querySelectorAll('select#centre-excelenta');
-        
+            const eleviAltiProfesori = document.querySelectorAll('input[name="elev_alti_profesori[]"]');            
+            const eleviCentreExcelenta = document.querySelectorAll('select[name="elev_centre_excelenta[]"]');
             const date = [
                 ["Nume Profesor", "Email Profesor", "Telefon Profesor"],
                 [profesorNume, profesorEmail, profesorTelefon],
@@ -317,21 +316,20 @@
             ];
         
             for (let i = 0; i < eleviNume.length; i++) {
-                // Obținem opțiunile selectate pentru centre de excelență
-                const optiuniSelectate = Array.from(eleviCentreExcelenta[i].selectedOptions)
-                    .map(option => option.value)
-                    .join(', ');
         
-                date.push([
-                    eleviNume[i].value,
-                    eleviScoala[i].value,
-                    eleviLocalitate[i].value,
-                    eleviEmail[i].value,
-                    eleviTelefon[i].value,
-                    eleviAltiProfesori[i].value,
-                    optiuniSelectate // Adăugăm aici opțiunile selectate
-                ]);
-            }
+                if (eleviNume[i] && eleviScoala[i] && eleviLocalitate[i] && eleviEmail[i] && eleviTelefon[i]) {
+                    date.push([
+                        eleviNume[i].value,
+                        eleviScoala[i].value,
+                        eleviLocalitate[i].value,
+                        eleviEmail[i].value,
+                        eleviTelefon[i].value,
+                        eleviAltiProfesori[i] ? eleviAltiProfesori[i].value : '',
+                        eleviCentreExcelenta[i] ? eleviCentreExcelenta[i].value : ''
+                    ]);
+                } else {
+                    console.error(`Lipsesc câmpuri pentru elevul ${i + 1}`);
+                }
         
             const wb = XLSX.utils.book_new();
             const ws = XLSX.utils.aoa_to_sheet(date);
