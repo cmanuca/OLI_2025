@@ -296,18 +296,19 @@
             eleviLista.appendChild(container);
         }
 
-        function exportaExcel() {
+       function exportaExcel() {
             const profesorNume = document.getElementById('profesor-nume').value;
             const profesorEmail = document.getElementById('profesor-email').value;
             const profesorTelefon = document.getElementById('profesor-telefon').value;
-        
+            
             const eleviNume = document.querySelectorAll('input[name="elev_nume[]"]');
             const eleviScoala = document.querySelectorAll('select[name="elev_scoala[]"]');
             const eleviLocalitate = document.querySelectorAll('input[name="elev_localitate[]"]');
             const eleviEmail = document.querySelectorAll('input[name="elev_email[]"]');
             const eleviTelefon = document.querySelectorAll('input[name="elev_telefon[]"]');
-            const eleviAltiProfesori = document.querySelectorAll('input[name="elev_alti_profesori[]"]');            
+            const eleviAltiProfesori = document.querySelectorAll('input[name="elev_alti_profesori[]"]');
             const eleviCentreExcelenta = document.querySelectorAll('select[name="elev_centre_excelenta[]"]');
+            
             const date = [
                 ["Nume Profesor", "Email Profesor", "Telefon Profesor"],
                 [profesorNume, profesorEmail, profesorTelefon],
@@ -316,7 +317,6 @@
             ];
         
             for (let i = 0; i < eleviNume.length; i++) {
-        
                 if (eleviNume[i] && eleviScoala[i] && eleviLocalitate[i] && eleviEmail[i] && eleviTelefon[i]) {
                     date.push([
                         eleviNume[i].value,
@@ -330,6 +330,7 @@
                 } else {
                     console.error(`Lipsesc câmpuri pentru elevul ${i + 1}`);
                 }
+            }
         
             const wb = XLSX.utils.book_new();
             const ws = XLSX.utils.aoa_to_sheet(date);
