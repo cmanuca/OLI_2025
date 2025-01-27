@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formular Înscriere Olimpiadă</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        .elev-container {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        .elev-container h4 {
+            margin-top: 0;
+        }
+        .button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Formular de Înscriere la Olimpiada Locală</h1>
+    <form id="formular-olimpiada">
+        <div id="elevi-lista">
+            <div class="elev-container">
+                <h4>Elev 1</h4>
+                <label>Nume și prenume:</label><br>
+                <input type="text" name="elev_nume[]" required><br><br>
+
+                <label>Clasa:</label><br>
+                <input type="text" name="elev_clasa[]" required><br><br>
+
+                <label>Școala:</label><br>
+                <input type="text" name="elev_scoala[]" required><br><br>
+
+                <label>Materia:</label><br>
+                <input type="text" name="elev_materie[]" required><br><br>
+            </div>
+        </div>
+
+        <button type="button" class="button" onclick="adaugaElev()">Adaugă Elev</button><br><br>
+        <button type="button" class="button" onclick="exportaExcel()">Exportă Excel</button>
+    </form>
+
+    <script>
+        let elevCounter = 1;
+
+        function adaugaElev() {
+            elevCounter++;
+            const eleviLista = document.getElementById('elevi-lista');
+
+            const container = document.createElement('div');
+            container.className = 'elev-container';
+            container.innerHTML = `
+                <h4>Elev ${elevCounter}</h4>
+                <label>Nume și prenume:</label><br>
+                <input type="text" name="elev_nume[]" required><br><br>
+
+                <label>Clasa:</label><br>
+                <input type="text" name="elev_clasa[]" required><br><br>
+
+                <label>Școala:</label><br>
+                <input type="text" name="elev_scoala[]" required><br><br>
+
+                <label>Materia:</label><br>
+                <input type="text" name="elev_materie[]" required><br><br>
+            `;
+            eleviLista.appendChild(container);
+        }
+
+        function exportaExcel() {
+            // Preia datele din formular
+            const nume = document.querySelectorAll('input[name="elev_nume[]"]');
+            const clasa = document.querySelectorAll('input[name="elev_clasa[]"]');
+            const scoala = document.querySelectorAll('input[name="elev_scoala[]"]');
+            const materie = document.querySelectorAll('input[name="elev_materie[]"]');
+
+            // Creează datele pentru Excel
+            const date = [["Nume și Prenume", "Clasă", "Școală", "Materie"]];
+            for (let i = 0; i < nume.length; i++) {
+                date.push([
+                    nume[i].value,
+                    clasa[i].value,
+                    scoala[i].value,
+                    materie[i].value,
+                ]);
+            }
+
+            // Creează fișierul Excel
+            const wb = XLSX.utils.book_new();
+            const ws = XLSX.utils.aoa_to_sheet(date);
+            XLSX.utils.book_append_sheet(wb, ws, "Lista Elevi");
+
+            // Exportă fișierul
+            XLSX.writeFile(wb, "Lista_Elevi.xlsx");
+        }
+    </script>
+</body>
+</html>
