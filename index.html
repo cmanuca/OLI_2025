@@ -230,53 +230,68 @@
 
         function adaugaElev() {
             elevCounter++;
+            
             const eleviLista = document.getElementById('elevi-lista');
 
             const container = document.createElement('div');
             container.className = 'elev-container';
             container.innerHTML = `
-                <h4>Elev ${elevCounter}</h4>
+                <h4>Detalii elev ${elevCounter}</h4>
                 
-                <label>Nume elev:</label><br>
-                <input type="text" name="elev_nume[]" required><br><br>
+                  <div class="input-group">
+                        <label for="elev-nume">Nume elev:</label>
+                        <input type="text" name="elev_nume[]" required>
+                    </div>
 
-                <label>Școala:</label><br>
-                <select name="elev_scoala[]" required>
-                 <option value='Colegiul "Nicolae Titulescu"'>Colegiul "Nicolae Titulescu"</option>
-                        <option value='Colegiul Național "Dr. Ioan Mesotă"'>Colegiul Național "Dr. Ioan Mesotă"</option>
-                        <option value='Colegiul Național ”Radu Negru”'>Colegiul Național ”Radu Negru”</option>
-                        <option value='Colegiul Național "Andrei Șaguna"'>Colegiul Național "Andrei Șaguna"</option>
-                        <option value='Colegiul Național de Informatică "Gr. Moisil"'>Colegiul Național de Informatică "Gr. Moisil"</option>
-                        <option value='Colegiul Național "Unirea"'>Colegiul Național "Unirea"</option>
-                        <option value='Liceul "Andrei Mureșanu"'>Liceul "Andrei Mureșanu"</option>
-                        <option value='Liceul Silvic "Dr. Nicolae Rucăreanu"'>Liceul Silvic "Dr. Nicolae Rucăreanu"</option>
-                        <option value='Școala Gimnazială Nr. 1'>Școala Gimnazială Nr. 1</option>
-                        <option value='Școala Gimnazială Nr. 2'>Școala Gimnazială Nr. 2</option>
-                        <option value='Școala Gimnazială Nr. 5'>Școala Gimnazială Nr. 5</option>
-                        <option value='Școala Gimnazială Nr. 8'>Școala Gimnazială Nr. 8</option>
-                        <option value='Școala Gimnazială Nr. 12'>Școala Gimnazială Nr. 12</option>
-                        <option value='Școala Gimnazială Nr. 19'>Școala Gimnazială Nr. 19</option>
-                        <option value='Școala Gimnazială Nr. 27'>Școala Gimnazială Nr. 27</option>
-                        <option value='Școala Gimnazială Nr. 4'>Școala Gimnazială Nr. 4</option>
-                </select><br><br>
-                
-                <label>Localitate școală:</label><br>
-                <input type="text" name="elev_localitate[]" required><br><br>
-                
-                <label>Email elev:</label><br>
-                <input type="email" name="elev_email[]" required><br><br>
+                    <div class="input-group">
+                        <label for="elev-scoala">Școala:</label>
+                        <select name="elev_scoala[]" required>
+                            <option value='Colegiul "Nicolae Titulescu"'>Colegiul "Nicolae Titulescu"</option>
+                            <option value='Colegiul Național "Dr. Ioan Mesotă"'>Colegiul Național "Dr. Ioan Mesotă"</option>
+                            <option value='Colegiul Național ”Radu Negru”'>Colegiul Național ”Radu Negru”</option>
+                            <option value='Colegiul Național "Andrei Șaguna"'>Colegiul Național "Andrei Șaguna"</option>
+                            <option value='Colegiul Național de Informatică "Gr. Moisil"'>Colegiul Național de Informatică "Gr. Moisil"</option>
+                            <option value='Colegiul Național "Unirea"'>Colegiul Național "Unirea"</option>
+                            <option value='Liceul "Andrei Mureșanu"'>Liceul "Andrei Mureșanu"</option>
+                            <option value='Liceul Silvic "Dr. Nicolae Rucăreanu"'>Liceul Silvic "Dr. Nicolae Rucăreanu"</option>
+                            <option value='Școala Gimnazială Nr. 1'>Școala Gimnazială Nr. 1</option>
+                            <option value='Școala Gimnazială Nr. 2'>Școala Gimnazială Nr. 2</option>
+                            <option value='Școala Gimnazială Nr. 5'>Școala Gimnazială Nr. 5</option>
+                            <option value='Școala Gimnazială Nr. 8'>Școala Gimnazială Nr. 8</option>
+                            <option value='Școala Gimnazială Nr. 12'>Școala Gimnazială Nr. 12</option>
+                            <option value='Școala Gimnazială Nr. 19'>Școala Gimnazială Nr. 19</option>
+                            <option value='Școala Gimnazială Nr. 27'>Școala Gimnazială Nr. 27</option>
+                            <option value='Școala Gimnazială Nr. 4'>Școala Gimnazială Nr. 4</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="elev-localitate">Localitate școală:</label>
+                        <input type="text" name="elev_localitate[]" required>
+                    </div>
 
-                <label>Telefon elev:</label><br>
-                <input type="text" name="elev_telefon[]" required><br><br>
+                    <div class="input-group">
+                        <label for="elev-email">Email elev:</label>
+                        <input type="email" name="elev_email[]" required>
+                    </div>
 
-                <label>Alți profesori:</label><br>
-                <input type="text" name="elev_alti_profesori[]"><br><br>
-                        
-                <label>Centre de excelență (alegere multiplă):</label><br>
-                <select multiple name="elev_centre_excelenta[]">
-                    <option value="CEX Brașov">CEX Brașov</option>
-                    <option value="ViaINFO">ViaINFO</option>                    
-                </select><br><br>                                    
+                    <div class="input-group">
+                        <label for="elev-telefon">Telefon elev:</label>
+                        <input type="text" name="elev_telefon[]" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="elev-alti-profesori-1">Alți profesori:</label>
+                        <input type="text" name="elev_alti_profesori[]">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="centre-excelenta">Centre de excelență (alegere multiplă):</label>
+                        <select id="centre-excelenta" multiple>
+                            <option value="CEX Brașov">CEX Brașov</option>
+                            <option value="ViaINFO">ViaINFO</option>                    
+                        </select>
+                    </div>
             `;
             eleviLista.appendChild(container);
         }
