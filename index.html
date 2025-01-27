@@ -143,19 +143,12 @@
         
         <div class="section" id="profesori-section">
             <h2>Detalii Profesori</h2>
+            
             <div class="input-group">
                 <label for="profesor-nume">Nume profesori coordonatori:</label>
                 <input type="text" id="profesor-nume" required>
             </div>
-
-            <div class="input-group">
-                <label for="centre-excelenta">Centre de excelență (alegere multiplă):</label>
-                <select id="centre-excelenta" multiple>
-                    <option value="CEX Brașov">CEX Brașov</option>
-                    <option value="ViaINFO">ViaINFO</option>                    
-                </select>
-            </div>
-
+            
             <div class="input-group">
                 <label for="profesor-email">Email profesor:</label>
                 <input type="email" id="profesor-email" required>
@@ -171,7 +164,7 @@
             <h2>Detalii Elevi</h2>
             <div id="elevi-lista">
                 <div class="elev-container">
-                    <h4>Elev 1</h4>
+                    <h4>Elev </h4>
                     <div class="input-group">
                         <label for="elev-nume-1">Nume elev:</label>
                         <input type="text" name="elev_nume[]" required>
@@ -205,10 +198,20 @@
                         <label for="elev-centre-excelenta-1">Centre de excelență:</label>
                         <input type="text" name="elev_centre_excelenta[]">
                     </div>
+
+                    <div class="input-group">
+                        <label for="centre-excelenta">Centre de excelență (alegere multiplă):</label>
+                        <select id="centre-excelenta" multiple>
+                            <option value="CEX Brașov">CEX Brașov</option>
+                            <option value="ViaINFO">ViaINFO</option>                    
+                        </select>
+                    </div>
                 </div>
-            </div>
             <button type="button" class="button" onclick="adaugaElev()">Adaugă Elev</button>
-        </div>
+        </div>    
+        
+        
+    </div>
 
         <div class="section">
             <button class="button" onclick="exportaExcel()">Exportă Excel</button>
