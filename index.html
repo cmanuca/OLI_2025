@@ -202,21 +202,83 @@
                         </select>
                     </div>
                 </div>
-            <button type="button" class="button" onclick="adaugaElev()">Adaugă Elev</button>
-        </div>    
-        
-        
+                <button type="button" class="button" onclick="adaugaElev()">Adaugă Elev</button>
     </div>
 
-        <div class="section">
-            <button class="button" onclick="exportaExcel()">Exportă Excel</button>
-        </div>
-    </div>
+    <button class="button" onclick="exportaExcel()">Exportă Excel</button>
 
     <script>
         let elevCounter = 1;
 
         function adaugaElev() {
             elevCounter++;
+            const eleviLista = document.getElementById('elevi-lista');
+
+            const container = document.createElement('div');
+            container.className = 'elev-container';
+            container.innerHTML = `
+                <h4>Elev ${elevCounter}</h4>
+                <label>Nume elev:</label><br>
+                <input type="text" name="elev_nume[]" required><br><br>
+
+                <label>Școala:</label><br>
+                <select name="elev_scoala[]" required>
+                    <option value="Liceul Teoretic Mihai Eminescu">Liceul Teoretic Mihai Eminescu</option>
+                    <option value="Școala Gimnazială George Coșbuc">Școala Gimnazială George Coșbuc</option>
+                    <option value="Liceul de Informatică">Liceul de Informatică</option>
+                </select><br><br>
+
+                <label>Email elev:</label><br>
+                <input type="email" name="elev_email[]" required><br><br>
+
+                <label>Telefon elev:</label><br>
+                <input type="text" name="elev_telefon[]" required><br><br>
+
+                <label>Alți profesori:</label><br>
+                <input type="text" name="elev_alti_profesori[]"><br><br>
+
+                <label>Centre de excelență:</label><br>
+                <input type="text" name="elev_centre_excelenta[]"><br><br>
+            `;
+            eleviLista.appendChild(container);
+        }
+
+        function exportaExcel() {
+            const profesorNume = document.getElementById('profesor-nume').value;
+            const profesorEmail = document.getElementById('profesor-email').value;
+            const profesorTelefon = document.getElementById('profesor-telefon').value;
+            const centreExcelenta = Array.from(document.getElementById('centre-excelenta').selectedOptions).map(opt => opt.value).join(", ");
+
+            const eleviNume = document.querySelectorAll('input[name="elev_nume[]"]');
+            const eleviScoala = document.querySelectorAll('select[name="elev_scoala[]"]');
+            const eleviEmail = document.querySelectorAll('input[name="elev_email[]"]');
+            const eleviTelefon = document.querySelectorAll('input[name="elev_telefon[]"]');
+            const eleviAltiProfesori = document.querySelectorAll('input[name="elev_alti_profesori[]"]');
+            const eleviCentreExcelenta = document.querySelectorAll('input[name="elev_centre_excelenta[]"]');
+
+            const date = [
+                ["Nume Profesor", "Email Profesor", "Telefon Profesor", "Centre Excelenta"],
+                [profesorNume, profesorEmail, profesorTelefon, centreExcelenta],
+                [],
+                ["Nume Elev", "Școala", "Email Elev", "Telefon Elev", "Alți Profesori", "Centre Excelență"]
+            ];
+
+            for (let i = 0; i < eleviNume.length; i++) {
+                date.push([
+                    eleviNume[i].value,
+                    eleviScoala[i].value,
+                    eleviEmail[i].value,
+                    eleviTelefon[i].value,
+                    eleviAltiProfesori[i].value,
+                    eleviCentreExcelenta[i].value
+                ]);
+            }
+
+            const wb = XLSX.utils.book_new();
+            const ws = XLSX.utils.aoa_to_sheet(date);
+            XLSX.utils.book_append_sheet(wb, ws, "Date Olimpiadă");
+            XLSX.writeFile(wb, "Date_Olimpiada.xlsx");
         }
     </script>
+</body>
+</html>
