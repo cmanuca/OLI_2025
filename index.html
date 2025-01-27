@@ -139,7 +139,7 @@
 <body>
     <br><br><br>
     <div class="container">    
-        <h1>Formular de Înscriere la Olimpiada Lo</h1>
+        <h1>Formular de Înscriere la Olimpiada Loa 2025, Brașov</h1>
         
         <div class="section" id="profesori-section">
             <h2>Detalii Profesori</h2>
@@ -161,7 +161,7 @@
         </div>
 
         <div class="section" id="elevi-section">
-            <h2>Detalii Elevi</h2>
+            <h2>Detalii Elev 1</h2>
             <div id="elevi-lista">
                 <div class="elev-container">
                     <h4>Elev </h4>
@@ -271,9 +271,12 @@
 
                 <label>Alți profesori:</label><br>
                 <input type="text" name="elev_alti_profesori[]"><br><br>
-
-                <label>Centre de excelență:</label><br>
-                <input type="text" name="elev_centre_excelenta[]"><br><br>
+                        
+                <label>Centre de excelență (alegere multiplă):</label><br>
+                <select multiple name="elev_centre_excelenta[]">
+                    <option value="CEX Brașov">CEX Brașov</option>
+                    <option value="ViaINFO">ViaINFO</option>                    
+                </select><br><br>                                    
             `;
             eleviLista.appendChild(container);
         }
