@@ -295,11 +295,21 @@
             `;
             eleviLista.appendChild(container);
         }
-
+    
+        function validateEmail(email) {
+            const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return regex.test(email);
+        }
+        
        function exportaExcel() {
             const profesorNume = document.getElementById('profesor-nume').value;
             const profesorEmail = document.getElementById('profesor-email').value;
-            const profesorTelefon = document.getElementById('profesor-telefon').value;
+            
+            if (!validateEmail(profesorEmail)) {
+                alert('Adresa de email a profesorului este invalidă!');
+                return;
+            }
+           const profesorTelefon = document.getElementById('profesor-telefon').value;
             
             const eleviNume = document.querySelectorAll('input[name="elev_nume[]"]');
             const eleviScoala = document.querySelectorAll('select[name="elev_scoala[]"]');
@@ -323,6 +333,11 @@
            
         
             for (let i = 0; i < eleviNume.length; i++) {
+                const elevEmail = eleviEmail[i].value;        
+                if (!validateEmail(elevEmail)) {
+                    alert(`Adresa de email a elevului ${i + 1} este invalidă!`);
+                    return;
+                }
                 if (eleviNume[i] && eleviScoala[i] && eleviLocalitate[i] && eleviEmail[i] && eleviTelefon[i]) {
                     const selectedCentreExcelenta = Array.from(eleviCentreExcelenta[i].selectedOptions)
                     .map(option => option.value)
