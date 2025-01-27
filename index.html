@@ -309,12 +309,18 @@
             const eleviAltiProfesori = document.querySelectorAll('input[name="elev_alti_profesori[]"]');
             const eleviCentreExcelenta = document.querySelectorAll('select[name="elev_centre_excelenta[]"]');
             
+     //       const date = [
+     //           ["Nume Profesor", "Email Profesor", "Telefon Profesor"],
+      //          [profesorNume, profesorEmail, profesorTelefon],
+      //          [],
+      //          ["Nume Elev", "Școala", "Localitate", "Email Elev", "Telefon Elev", "Alți Profesori", "Centre excelență"]
+       //     ];
+
             const date = [
-                ["Nume Profesor", "Email Profesor", "Telefon Profesor"],
-                [profesorNume, profesorEmail, profesorTelefon],
-                [],
-                ["Nume Elev", "Școala", "Localitate", "Email Elev", "Telefon Elev", "Alți Profesori", "Centre excelență"]
+                ["Nume Elev", "Școala", "Localitate", "Email Elev", "Telefon Elev", "Alți Profesori", "Centre excelență", "Nume Profesor", "Email Profesor", "Telefon Profesor"],
+                []
             ];
+           
         
             for (let i = 0; i < eleviNume.length; i++) {
                 if (eleviNume[i] && eleviScoala[i] && eleviLocalitate[i] && eleviEmail[i] && eleviTelefon[i]) {
@@ -329,7 +335,11 @@
                         eleviEmail[i].value,
                         eleviTelefon[i].value,
                         eleviAltiProfesori[i] ? eleviAltiProfesori[i].value : '',
-                        selectedCentreExcelenta // Store the selected values as a comma-separated string
+                        selectedCentreExcelenta, // Store the selected values as a comma-separated string
+                        profesorNume.value,
+                        profesorEmail.value,
+                        profesorTelefon.value
+                        
                     ]);
                 } else {
                     console.error(`Lipsesc câmpuri pentru elevul ${i + 1}`);
