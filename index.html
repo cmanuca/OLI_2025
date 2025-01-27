@@ -318,6 +318,10 @@
         
             for (let i = 0; i < eleviNume.length; i++) {
                 if (eleviNume[i] && eleviScoala[i] && eleviLocalitate[i] && eleviEmail[i] && eleviTelefon[i]) {
+                    const selectedCentreExcelenta = Array.from(eleviCentreExcelenta[i].selectedOptions)
+                    .map(option => option.value)
+                    .join(', ');  // Join multiple values with a comma if more than one is selected
+        
                     date.push([
                         eleviNume[i].value,
                         eleviScoala[i].value,
@@ -325,7 +329,7 @@
                         eleviEmail[i].value,
                         eleviTelefon[i].value,
                         eleviAltiProfesori[i] ? eleviAltiProfesori[i].value : '',
-                        eleviCentreExcelenta[i] ? eleviCentreExcelenta[i].value : ''
+                        selectedCentreExcelenta // Store the selected values as a comma-separated string
                     ]);
                 } else {
                     console.error(`Lipsesc câmpuri pentru elevul ${i + 1}`);
