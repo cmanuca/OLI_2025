@@ -224,6 +224,7 @@
     </div>
 
     <button class="button" onclick="exportaExcel()">Exportă Excel</button>
+    <button class="button" onclick="exportaGoogleSheets()">Exportă GoogleSheets</button>
 
     <script>
         let elevCounter = 1;
@@ -365,6 +366,53 @@
             const ws = XLSX.utils.aoa_to_sheet(date);
             XLSX.utils.book_append_sheet(wb, ws, "Date Olimpiadă");
             XLSX.writeFile(wb, "Date_Olimpiada.xlsx");
+        }
+
+        function exportaGoogleSheets() {
+            const profesorNume = document.getElementById('profesor-nume').value;
+            const profesorEmail = document.getElementById('profesor-email').value;
+            const profesorTelefon = document.getElementById('profesor-telefon').value;
+        
+            const eleviNume = document.querySelectorAll('input[name="elev_nume[]"]');
+            const eleviScoala = document.querySelectorAll('select[name="elev_scoala[]"]');
+            const eleviLocalitate = document.querySelectorAll('input[name="elev_localitate[]"]');
+            const eleviEmail = document.querySelectorAll('input[name="elev_email[]"]');
+            const eleviTelefon = document.querySelectorAll('input[name="elev_telefon[]"]');
+            const eleviAltiProfesori = document.querySelectorAll('input[name="elev_alti_profesori[]']');
+            const eleviCentreExcelenta = document.querySelectorAll('select[name="elev_centre_excelenta[]"]');
+        
+            for (let i = 0; i < eleviNume.length; i++) {
+                const data = {
+                    profesor_nume: profesorNume,
+                    profesor_email: profesorEmail,
+                    profesor_telefon: profesorTelefon,
+                    elev_nume: eleviNume[i].value,
+                    elev_scoala: eleviScoala[i].value,
+                    elev_localitate: eleviLocalitate[i].value,
+                    elev_email: eleviEmail[i].value,
+                    elev_telefon: eleviTelefon[i].value,
+                    elev_alti_profesori: eleviAltiProfesori[i] ? eleviAltiProfesori[i].value : '',
+                    elev_centre_excelenta: Array.from(eleviCentreExcelenta[i].selectedOptions)
+                        .map(option => option.value)
+                        .join(', ')
+                };
+        
+                // Trimite datele către Google Sheets
+                fetch('https://script.google.com/macros/s/AKfycbxhYD3HtkLNCAOFUNh19BzGi8Pfq0CcXuEuhwVb8zNjZhg_JgSu7tBAVxGRj_VtzeRm/exec', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Date trimise cu succes:', data);
+                })
+                .catch(error => {
+                    console.error('Eroare la trimiterea datelor:', error);
+                });
+            }
         }
     </script>
 </body>
