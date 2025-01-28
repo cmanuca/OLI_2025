@@ -225,7 +225,8 @@
 
     <button type="button" class="button" onclick="exportaExcel()">Exportă Excel</button>
     <br>
-    <button type="button" class="button" onclick="exportaGoogleSheets()">Exportă GoogleSheets</button>
+    <button type="button" class="button" onclick="appendData()">Exportă GoogleSheets</button>
+            
 
     <script>
         let elevCounter = 1;
@@ -448,6 +449,49 @@
             alert("Nu s-a putut realiza conexiunea cu Google Sheets.");
         }
     }
+
+        function appendData() {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Sheet1");
+  
+  // Get the form data
+  const profesorNume = "John Doe";  // Replace with the actual input data or get it from the form
+  const profesorEmail = "john.doe@example.com"; // Replace with the actual input data
+  const profesorTelefon = "123456789"; // Replace with the actual input data
+  
+  const eleviNume = ["Student1", "Student2"];  // Replace with actual student names
+  const eleviScoala = ["School1", "School2"];  // Replace with actual schools
+  const eleviLocalitate = ["City1", "City2"];  // Replace with actual locations
+  const eleviEmail = ["student1@example.com", "student2@example.com"];  // Replace with actual emails
+  const eleviTelefon = ["123", "456"];  // Replace with actual phone numbers
+  const eleviAltiProfesori = ["Prof1", "Prof2"];  // Replace with actual other professors
+  const eleviCentreExcelenta = ["Center1", "Center2"];  // Replace with actual centers
+  
+  const rows = [];
+  
+  // Add header (optional if the header is already present)
+  rows.push(["Nume Elev", "Școala", "Localitate", "Email Elev", "Telefon Elev", "Alți Profesori", "Centre Excelenta", "Nume Profesor", "Email Profesor", "Telefon Profesor"]);
+  
+  // Loop over student data and prepare rows
+  for (let i = 0; i < eleviNume.length; i++) {
+    rows.push([
+      eleviNume[i],
+      eleviScoala[i],
+      eleviLocalitate[i],
+      eleviEmail[i],
+      eleviTelefon[i],
+      eleviAltiProfesori[i],
+      eleviCentreExcelenta[i],
+      profesorNume,
+      profesorEmail,
+      profesorTelefon
+    ]);
+  }
+  
+  // Append the data to the sheet
+  sheet.getRange(sheet.getLastRow() + 1, 1, rows.length, rows[0].length).setValues(rows);
+  
+  Logger.log("Data added successfully!");
+}
     </script>
 </body>
 </html>
